@@ -56,7 +56,7 @@ Installation: <https://github.com/google-deepmind/alphafold3/blob/main/docs/inst
 
 ## **STEP-1**
 
-**\#**Install HMMER and change the path according to yours linux user name, everywhere from step1 to end when you find /home/ullah
+Install HMMER and change the path according to yours linux user name, everywhere from step1 to end when you find /home/ullah
 
 Creat a directory(biotools) in /home/your_username/
 
