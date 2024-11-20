@@ -14,7 +14,7 @@ Installation: <https://github.com/google-deepmind/alphafold3/blob/main/docs/inst
 
 ## Lets install AlphaFold3
 
-**Hardware/Software already installed:**
+**Prerequisites Hardware:**
 
 -OS: Fedora39
 
@@ -26,7 +26,7 @@ Installation: <https://github.com/google-deepmind/alphafold3/blob/main/docs/inst
 
 ***Important:*** make sure your GPU have 8.6 or higher compute capability. Check a nice discussion ***anything with GPU capability \< 8.0 produces bad results. here:*** <https://github.com/google-deepmind/alphafold3/issues/59> [![Nice info shared by Augustin-Zidek](images/Screenshot 2024-11-19 143427.png)](https://github.com/google-deepmind/alphafold3/issues/59#:~:text=rtx_2080_ti%20%20%20%20%20%207.5%20%20(bad)%0Artx_3090%20%20%20%20%20%20%20%20%208.6%0Artx_4090%20%20%20%20%20%20%20%20%208.9%0Atitan_rtx%20%20%20%20%20%20%20%207.5%20%20(bad)%0Aquadro_rtx_6000%20%207.5%20%20(bad)%0Av100%20%20%20%20%20%20%20%20%20%20%20%20%207.0%20%20(bad)%0Aa100_pcie_40gb%20%20%208.0%0Aa100_80gb%20%20%20%20%20%20%20%208.0)
 
-**Prerequisites/installations:**
+**Prerequisites packages-system Setup:**
 
 -   sudo dnf groupinstall "Development Tools"
 
@@ -54,14 +54,14 @@ Installation: <https://github.com/google-deepmind/alphafold3/blob/main/docs/inst
 
 -   sudo dnf install python3.11
 
-## **STEP-1**
+## **STEP1 - Install HMMER**
 
-Install HMMER and change the path according to yours linux user name, everywhere from step1 to end when you find /home/ullah
+Install HMMER and change the path according to yours linux user name
 
-Creat a directory(biotools) in /home/your_username/
+Creat a directory(called biotools) in /home/your_username/biotools
 
 ``` bash
-HMMER_DIR="/home/ullah/biotools/hmmer"
+HMMER_DIR="/home/your_username/biotools/hmmer"
 
 wget http://eddylab.org/software/hmmer/hmmer-3.4.tar.gz
 
@@ -80,12 +80,12 @@ cd easel
 make install
 ```
 
-## **STEP-2**
+## **STEP2 - Setup AlphaFold3**
 
-Clone Af3 and download databases
+Clone AF3 repo to biotools directory and download databases
 
 ``` bash
-APPDIR="/home/ullah/biotools"
+APPDIR="/home/your_username/biotools"
 
 mkdir -p $APPDIR cd $APPDIR
 git clone https://github.com/google-deepmind/alphafold3.git
@@ -97,17 +97,18 @@ chmod +x fetch_databases.sh
 ./fetch_databases.sh 
 ```
 
-#it will fetch and unzip total 09-databases, make sure to check and unzip the ***"pdb_2022_09_28_mmcif_files.tar"*** in the directory(public_databases) if you want to predict small molecules and It takes alot of time unzipping.
+It will fetch and unzip total 09-databases, make sure to check and unzip the ***"pdb_2022_09_28_mmcif_files.tar"*** in the directory(public_databases) if you want to predict small molecules and It takes alot of time unzipping.
 
-## **STEP-3**
+## **STEP3 - Model Setup**
 
-#unzip models and move files; "af3.bin and af3.bin.zst" to /home/ullah/biotools/alphafold/models or anywhere you want but remember the path.
+Decompress model file: zstd -d af3.bin.zst and move files; "af3.bin and af3.bin.zst" to /home/your_username/biotools/alphafold/models
 
 ``` bash
 zstd -d af3.bin.zst
 ```
+## **STEP4 - Environment Setup**
 
-#Open terminal from home dir and just COPY and PASTE and press ENTER.
+Create and activate virtual environment
 
 ``` bash
 cd ${ALPHAFOLD3DIR}
@@ -117,13 +118,13 @@ python -m venv .venv
 . .venv/bin/activate
 ```
 
-#Just check that you're going good by seeing something; /usr/bin/python when you type in terminal.
+Just check that you're going good by seeing something; /usr/bin/python when you type in terminal.
 
 ``` bash
 which python
 ```
 
-#Now install packages
+Install required packages using pip
 
 ``` bash
 python -m pip install absl-py==2.1.0 chex==0.1.87 dm-haiku==0.0.13 dm-tree==0.1.8 \
@@ -140,49 +141,53 @@ python -m pip install absl-py==2.1.0 chex==0.1.87 dm-haiku==0.0.13 dm-tree==0.1.
     typing-extensions==4.12.2 zstandard==0.23.0
 ```
 
-#After this step you'll see ***"Successfully installed alphafold3-3.0.0" on your Terminal.***
+After this step you'll see ***"Successfully installed alphafold3-3.0.0" on your Terminal.***
 
 ``` bash
 python -m pip install --no-deps .
 ```
 
-#Then do the some build
+Run build_data
 
 ``` bash
 .venv/bin/build_data
 ```
 
-#Run and Check if AF3 works and help message is displayed
+Verify installation of AF3 works and check help message is displayed
 
 ``` bash
-python3 run_alphafold.py --help
+python run_alphafold.py --help
 ```
 
-***Congratulations!!!!***
+***Congratulations thats it!!!!***
 
-#However just check that everything is in its right place and is happy
 
-Check models directory
+**Before Running Predictions**
+
+Check models directory outputs displayed
 
 ``` bash
-ls -l /home/ullah/models
+ls -l /home/your_username/models
 ```
 
-Check public databases
+Check public databases outputs displayed
 
 ``` bash
-ls -l /home/ullah/biotools/alphafold3/public_databases
+ls -l /home/your_username/biotools/alphafold3/public_databases
 ```
 
-Check HMMER binaries
+Check HMMER binaries outputs displayed
 
 ``` bash
-ls -l /home/ullah/biotools/hmmer/bin/hmm*
+ls -l /home/your_username/biotools/hmmer/bin/hmm*
 ```
 
-#### Time to run AF3, so two thing we need; input----\> json file and bash script. You can read more on input here <https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md>
+We're good now...
 
-#Now creat a folder anywhere with any name. We'll place json and script and run it from there. Simply paste below code in terminal and press ENTER which will create a json file.
+**Lets Run AF3 Predictions**
+#### Time to run AF3, so two thing we need; input json file and bash script. You can read more on input here <https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md>
+
+Create input JSON file with protein sequence in a folder anywhere with any name. We'll both place json and script together and run it from there. Simply paste below code in terminal and press ENTER which will create a json file for a protein structure predictions.
 
 ``` bash
 cat > test.json << 'EOL'
@@ -202,8 +207,12 @@ cat > test.json << 'EOL'
 ]
 EOL
 ```
+Here's the bash Script to run AF3
+Now copy the code and save into a file name **AF3_script.sh**
+Update paths in run script: 
+***PATHS AND DIRECTORIES*** according to your ***username***
+*ALPHAFOLD3DIR="/home/your_username/biotools/alphafold3" HMMER3_BINDIR="/home/your_username/biotools/hmmer/bin" DB_DIR="/home/your_username/biotools/alphafold3/public_databases" MODEL_DIR="/home/your_username/biotools/alphafold3/models"*
 
-#Now copy this code and save into a file name **AF3_script.sh**
 
 ``` bash
 #!/bin/bash
@@ -298,10 +307,10 @@ function monitor_progress() {
 }
 
 #============= PATHS AND DIRECTORIES =============
-ALPHAFOLD3DIR="/home/ullah/biotools/alphafold3"
-HMMER3_BINDIR="/home/ullah/biotools/hmmer/bin"
-DB_DIR="/home/ullah/biotools/alphafold3/public_databases"
-MODEL_DIR="/home/ullah/biotools/alphafold3/models"
+ALPHAFOLD3DIR="/home/your_username/biotools/alphafold3"
+HMMER3_BINDIR="/home/your_username/biotools/hmmer/bin"
+DB_DIR="/home/your_username/biotools/alphafold3/public_databases"
+MODEL_DIR="/home/your_username/biotools/alphafold3/models"
 
 #============= GPU SETUP =============
 export CUDA_VISIBLE_DEVICES=0
@@ -389,16 +398,15 @@ else
 fi
 ```
 
-Before running the script, just open in gedit and replace the ***PATHS AND DIRECTORIES*** according to your ***username***
 
-*ALPHAFOLD3DIR="/home/ullah/biotools/alphafold3" HMMER3_BINDIR="/home/ullah/biotools/hmmer/bin" DB_DIR="/home/ullah/biotools/alphafold3/public_databases" MODEL_DIR="/home/ullah/biotools/alphafold3/models"*
-
+**Execute AF3_script.sh**
 ``` bash
 chmod +x AF3_script.sh
 
 ./AF3_script.sh
 ```
 
+**Results**
 You will get an output folder named based on the json input file that you feeded to AF3.
 
 You can run this script from anywhere as long as you have JSON file placed in a folder together.
