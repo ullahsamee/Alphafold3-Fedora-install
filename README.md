@@ -12,8 +12,6 @@ Installation: <https://github.com/google-deepmind/alphafold3/blob/main/docs/inst
 
 <https://docs.google.com/forms/d/e/1FAIpQLSfWZAgo1aYk0O4MuAXZj8xRQ8DafeFJnldNOnh_13qAx2ceZw/viewform>
 
-## Lets install AlphaFold3
-
 **Prerequisites Hardware:**
 
 -OS: Fedora39
@@ -22,7 +20,7 @@ Installation: <https://github.com/google-deepmind/alphafold3/blob/main/docs/inst
 
 \-*I have; 2xRTX 3090Ti GPU, 128GB Memory , 12TB SSD*
 
--Python3.11 or higher
+-Python3.11 or higher (AF3 not works on lower than py3.11v)
 
 ***Important:*** make sure your GPU have 8.6 or higher compute capability. Check a nice discussion ***anything with GPU capability \< 8.0 produces bad results. here:*** <https://github.com/google-deepmind/alphafold3/issues/59> [![Nice info shared by Augustin-Zidek](images/Screenshot 2024-11-19 143427.png)](https://github.com/google-deepmind/alphafold3/issues/59#:~:text=rtx_2080_ti%20%20%20%20%20%207.5%20%20(bad)%0Artx_3090%20%20%20%20%20%20%20%20%208.6%0Artx_4090%20%20%20%20%20%20%20%20%208.9%0Atitan_rtx%20%20%20%20%20%20%20%207.5%20%20(bad)%0Aquadro_rtx_6000%20%207.5%20%20(bad)%0Av100%20%20%20%20%20%20%20%20%20%20%20%20%207.0%20%20(bad)%0Aa100_pcie_40gb%20%20%208.0%0Aa100_80gb%20%20%20%20%20%20%20%208.0)
 
@@ -101,7 +99,8 @@ It will fetch and unzip total 09-databases, make sure to check and unzip the ***
 
 ## **STEP3 - Model Setup**
 
-Decompress model file: zstd -d af3.bin.zst and move files; "af3.bin and af3.bin.zst" to /home/your_username/biotools/alphafold/models
+Decompress models that you received from alphafold team: af3.bin.zst and move files; "af3.bin and af3.bin.zst" to /home/your_username/biotools/alphafold/models
+Note: If you can't see models folder, Create it.
 
 ``` bash
 zstd -d af3.bin.zst
