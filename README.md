@@ -140,7 +140,7 @@ python -m pip install absl-py==2.1.0 chex==0.1.87 dm-haiku==0.0.13 dm-tree==0.1.
     typing-extensions==4.12.2 zstandard==0.23.0
 ```
 
-After this step you'll see ***"Successfully installed alphafold3-3.0.0" on your Terminal.***
+When you run this command and its finished check for message ***"Successfully installed alphafold3-3.0.0" on your Terminal.***
 
 ``` bash
 python -m pip install --no-deps .
