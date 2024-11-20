@@ -208,9 +208,16 @@ EOL
 ```
 Here's the bash Script to run AF3
 Now copy the code and save into a file name **AF3_script.sh**
-Update paths in run script: 
+Update paths in bash Script "AF3_script.sh": 
 ***PATHS AND DIRECTORIES*** according to your ***username***
-*ALPHAFOLD3DIR="/home/your_username/biotools/alphafold3" HMMER3_BINDIR="/home/your_username/biotools/hmmer/bin" DB_DIR="/home/your_username/biotools/alphafold3/public_databases" MODEL_DIR="/home/your_username/biotools/alphafold3/models"*
+
+ALPHAFOLD3DIR="/home/your_username/biotools/alphafold3"
+
+HMMER3_BINDIR="/home/your_username/biotools/hmmer/bin" 
+
+DB_DIR="/home/your_username/biotools/alphafold3/public_databases" 
+
+MODEL_DIR="/home/your_username/biotools/alphafold3/models"
 
 
 ``` bash
