@@ -184,7 +184,7 @@ ls -l /home/your_username/biotools/hmmer/bin/hmm*
 We're good now...
 
 **Lets Run AF3 Predictions**
-#### Time to run AF3, so two thing we need; input json file and bash script. You can read more on input here <https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md>
+#### Two thing we need; input json file and bash script. You can read more on input here <https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md>
 
 Create input JSON file with protein sequence in a folder anywhere with any name. We'll both place json and script together and run it from there. Simply paste below code in terminal and press ENTER which will create a json file for a protein structure predictions.
 
@@ -417,4 +417,22 @@ You will get an output folder named based on the json input file that you feeded
 
 You can run this script from anywhere as long as you have JSON file placed in a folder together.
 
-reach me out on [Linkedin](https://www.linkedin.com/in/samee-ullah-structural-biologist/), if you want me to model something for you
+**Don't Forget alias** 
+```
+sudo gedit .bashrc
+
+```
+Now add alias,
+```
+alias af3="source /home/your_username/biotools/alphafold3/.venv/bin/activate"
+```
+save and close
+
+**Everytime when you run** AF3_script.sh, before that just simply **type af3 in terminal** which will activate the environment for you. Now Run Script
+```
+af3
+
+```
+
+
+Do not hesitate to reach me out on [Linkedin](https://www.linkedin.com/in/samee-ullah-structural-biologist/), if you want me to model something for you for free or maybe we can work together on some interesting ideas.
